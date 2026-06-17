@@ -114,7 +114,7 @@ const Index = () => {
               Приём сегодня · Запись онлайн
             </div>
             <h1 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight md:text-6xl">
-              Медицинские обследования <span className="text-primary">без очередей</span>
+              Организация медицинских обследований <span className="text-primary">без очередей</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-muted-foreground">
               Выберите врача и удобное время — мы организуем полную диагностику и свяжемся для подтверждения записи.
