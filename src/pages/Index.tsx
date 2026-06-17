@@ -131,7 +131,6 @@ const Index = () => {
               {[
                 { v: '50 000+', l: 'пациентов' },
                 { v: '24 ч', l: 'результат анализов' },
-                { v: '4.9', l: 'рейтинг клиники' },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="font-heading text-2xl font-extrabold text-foreground">{s.v}</div>
@@ -147,15 +146,7 @@ const Index = () => {
               alt="Современная медицинская клиника"
               className="relative aspect-square w-full rounded-[2rem] object-cover shadow-2xl"
             />
-            <div className="absolute -bottom-5 -left-5 flex items-center gap-3 rounded-2xl border border-border bg-card p-4 shadow-xl animate-float">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                <Icon name="ShieldCheck" size={22} />
-              </div>
-              <div>
-                <div className="font-heading text-sm font-bold">Лицензия Минздрава</div>
-                <div className="text-xs text-muted-foreground">Безопасно и официально</div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
