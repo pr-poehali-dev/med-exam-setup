@@ -109,10 +109,7 @@ const Index = () => {
       <section className="relative overflow-hidden hero-grid">
         <div className="container grid items-center gap-12 py-20 md:grid-cols-2 md:py-28">
           <div className="animate-fade-in">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground">
-              <span className="flex h-2 w-2 rounded-full bg-primary" />
-              Приём сегодня · Запись онлайн
-            </div>
+
             <h1 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight md:text-6xl">
               Организация медицинских обследований <span className="text-primary">без очередей</span>
             </h1>
