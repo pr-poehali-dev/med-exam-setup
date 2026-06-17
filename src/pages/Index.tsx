@@ -25,6 +25,8 @@ const doctors = [
 
 const slots = ['09:00', '10:30', '12:00', '14:00', '15:30', '17:00'];
 
+const BOOKING_URL = 'https://functions.poehali.dev/ee1df850-114f-464e-8fbe-9324bfdae561';
+
 const reviews = [
   {
     name: 'Елена К.',
@@ -50,13 +52,35 @@ const Index = () => {
   const { toast } = useToast();
   const [doctor, setDoctor] = useState(doctors[0].name);
   const [slot, setSlot] = useState(slots[0]);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: 'Заявка отправлена!',
-      description: `${doctor}, время ${slot}. Мы свяжемся с вами для подтверждения.`,
-    });
+    setLoading(true);
+    try {
+      const res = await fetch(BOOKING_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, doctor, time: slot }),
+      });
+      if (!res.ok) throw new Error();
+      toast({
+        title: 'Заявка отправлена!',
+        description: `${doctor}, время ${slot}. Мы свяжемся с вами для подтверждения.`,
+      });
+      setName('');
+      setPhone('');
+    } catch {
+      toast({
+        title: 'Не удалось отправить',
+        description: 'Попробуйте ещё раз или позвоните нам по телефону.',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -262,16 +286,16 @@ const Index = () => {
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">Имя</Label>
-                <Input id="name" placeholder="Ваше имя" required />
+                <Input id="name" placeholder="Ваше имя" required value={name} onChange={(e) => setName(e.target.value)} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Телефон</Label>
-                <Input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required />
+                <Input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required value={phone} onChange={(e) => setPhone(e.target.value)} />
               </div>
             </div>
 
-            <Button type="submit" size="lg" className="w-full rounded-full">
-              Записаться на приём
+            <Button type="submit" size="lg" className="w-full rounded-full" disabled={loading}>
+              {loading ? 'Отправляем…' : 'Записаться на приём'}
             </Button>
           </form>
         </div>
